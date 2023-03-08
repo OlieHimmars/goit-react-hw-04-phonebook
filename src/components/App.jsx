@@ -1,20 +1,13 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import ContactFilter from './ContactFilter';
 import { Layout, TitlePhoneBook, TitleContacts } from './AppStyled';
 
-export function App() {
+export  const App = () => {
   const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState('');
-
- useEffect(() => {
-    const contacts = window.localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
-
-    parsedContacts ? setContacts(parsedContacts) : setContacts([]);
-  }, []);
+   const [filter, setFilter] = useState('');
 
   useEffect(() => {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
