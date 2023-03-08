@@ -6,8 +6,10 @@ export default function ContactForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const onChangeName = e => setName(e.target.value);
-  const onChangeNumber = e => setNumber(e.target.value);
+
+  const onChangeName = e => setName(e.currentTarget.value);
+  const onChangeNumber = e => setNumber(e.currentTarget.value);
+
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -23,17 +25,17 @@ export default function ContactForm({ onSubmit }) {
   return (
     <Formik
       initialValues={{ name: '', number: '' }}
-      onSubmit={handleSubmit}
+      
     >
-      <MainForm autoComplete="off">
+      <MainForm autoComplete="off" onSubmit={handleSubmit}>
         <div>
           <FormLabel htmlFor="name">Name</FormLabel>
           <div>
             <Input
               onChange={onChangeName}
+              value={name}
               type="text"
               name="name"
-              value={name}
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
@@ -45,9 +47,9 @@ export default function ContactForm({ onSubmit }) {
           <div>
             <Input
               onChange={onChangeNumber}
+              value={number}
               type="tel"
               name="number"
-              value={number}
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
