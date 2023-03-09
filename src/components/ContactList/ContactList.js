@@ -5,29 +5,15 @@ import { List } from './ContactListStyled';
 export default function ContactList({ contacts, onDeleteContact }) {
   return (
     <List>
-      {contacts.map(({ id, name, number }) => {
-        return (
-          <li key={id}>
             <ContactItem
-              name={name}
-              number={number}
-              onDeleteContact={() => onDeleteContact(id)}
-              contactId={id}
+              contacts={contacts}
+              onDeleteContact={onDeleteContact}
             />
-          </li>
-        );
-      })}
     </List>
   );
 }
 
 ContactList.prototype = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  contacts: PropTypes.array.isRequired,
   onDeleteContact: PropTypes.func.isRequired,
 };

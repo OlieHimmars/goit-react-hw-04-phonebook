@@ -6,7 +6,9 @@ import ContactFilter from './ContactFilter';
 import { Layout, TitlePhoneBook, TitleContacts } from './AppStyled';
 
 export  const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => {
+    return JSON.parse(localStorage.getItem('contacts')) ?? [];
+  });
    const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -33,9 +35,8 @@ export  const App = () => {
   const changeFilter = e => setFilter(e.currentTarget.value);
 
   const filtredContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
+      contact.name.toLowerCase().includes(filter.toLowerCase()),
     );
   };
 

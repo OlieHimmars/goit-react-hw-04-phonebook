@@ -1,23 +1,17 @@
-import propTypes from 'prop-types';
+import React from 'react';
 import { Item, DelButton } from './ContactItemStyled';
 
-const ContactItem = ({ contactId, name, number, onDeleteContact }) => {
-  return (
-    <Item>
+const ContactItem = ({ contacts, onDeleteContact }) => 
+  contacts.map(({ id, name, number }) => {
+    return (
+    <Item key={id}>
       <span>{name}:</span>
       <span>{number}</span>
-      <DelButton type="button" onClick={() => onDeleteContact(contactId)}>
+      <DelButton type="button" onClick={() => onDeleteContact(id)}>
         Delete
       </DelButton>
     </Item>
   );
-};
-
-ContactItem.propTypes = {
-  name: propTypes.string.isRequired,
-  contactId: propTypes.string.isRequired,
-  number: propTypes.string.isRequired,
-  onDeleteContact: propTypes.func.isRequired,
-};
+});
 
 export default ContactItem;
